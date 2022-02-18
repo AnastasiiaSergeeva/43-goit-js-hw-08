@@ -6,7 +6,7 @@
   "homepage": "https://github.com/AnastasiiaSergeeva/43-goit-js-hw-08",
   "scripts": {
     "dev": "parcel src/*.html",
-    "build": "parcel build src/*.html --public-url /43-goit-js-hw-08npm/"
+    "build": "parcel build src/*.html --public-url /43-goit-js-hw-08/"
   },
   "repository": {
     "type": "git",
