@@ -15,30 +15,37 @@ form.addEventListener('input', throttle(onInput, 500));
 form.addEventListener('submit', onSubmit);
 
 function onInput(evt) {
-    formData[evt.target.name] = evt.target.value;
+  evt.preventDefault();
+  formData.email = form.elements.email.value;
+  formData.message = form.elements.message.value;
 
   localStorage.setItem(LOCALSTORAGE_KEY, JSON.stringify(formData));
 };
-
-
-function onSubmit(evt) { 
-  evt.preventDefault();
-
-  if (localStorage.getItem(LOCALSTORAGE_KEY)) {
-    console.log(JSON.parse(localStorage.getItem(LOCALSTORAGE_KEY)));
-  };
-  
-  evt.currentTarget.reset();
-
-  localStorage.removeItem(LOCALSTORAGE_KEY);
-};
-
 function updateForm() {
   const savedData = localStorage.getItem(LOCALSTORAGE_KEY);
   if (savedData) {
       const { email, message } = JSON.parse(savedData);
       form.email.value = email;
       form.message.value = message;
+      formData.email = email;
+      formData.message = message;
         
+  };
+};
+
+function onSubmit(evt) { 
+  evt.preventDefault();
+
+  if (formData.email && formData.message) {
+    console.log(JSON.parse(localStorage.getItem(LOCALSTORAGE_KEY)));
+    evt.currentTarget.reset();
+     localStorage.removeItem(LOCALSTORAGE_KEY);
+  // formData.email = '';
+  // formData.message = '';
+  } else {
+    window.alert('Заполните все поля')
   }
-}
+
+};
+
+
